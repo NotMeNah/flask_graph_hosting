@@ -48,29 +48,30 @@ def download_graph(graph_id):
         if filename.startswith(f'{graph_id}.'):
             target_file=filename
             break
-    if target_file:
-        return_format=request.args.get('format','stream').lower()
 
-        if return_format=='base64':
-            file_full_path=graph_path.joinpath(target_file)
-            try:
-                with open(file_full_path,'rb')as f:
-                    base64_str=file_to_base(f)
-                    return jsonify({
-                        'code':200,
-                        'msg':'获取base64成功',
-                        'data':{
-                            'graph_id':graph_id,
-                            'base64_str':base64_str,
-                            'file_format':target_file.split('.')[-1]
-                        }
-                    })
-            except Exception as e:
-                return jsonify({'code':500,'msg':f'转换Base64失败：{str(e)}'}),500
-        else:
-            return send_from_directory(up_folder,target_file)
-    else:
+    if  not target_file:
         return '未找到对应图片'
+    return_format=request.args.get('format','stream').lower()
+
+    if return_format!='base64':
+        return send_from_directory(up_folder, target_file)
+    file_full_path=graph_path.joinpath(target_file)
+
+    try:
+        with open(file_full_path,'rb')as f:
+            base64_str=file_to_base(f)
+    except Exception as e:
+        return jsonify({'code': 500, 'msg': f'转换Base64失败：{str(e)}'}), 500
+
+    return jsonify({
+        'code':200,
+        'msg':'获取base64成功',
+        'data':{
+            'graph_id':graph_id,
+            'base64_str':base64_str,
+            'file_format':Path(target_file).suffix[1:]
+        }
+    })
 
 
 
