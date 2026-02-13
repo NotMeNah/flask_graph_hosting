@@ -1,25 +1,28 @@
-import os
 from os import listdir
 from uuid import uuid4
-from flask import Flask,request,send_from_directory,jsonify
+from flask import Flask,request,send_from_directory,jsonify,Blueprint
+from flask_login import login_required,current_user
+
 from common.profile import Profile
 from pathlib import Path
 import base64
 
+from models.graph import Graph
+from enter.extensions import db
 
-app=Flask(__name__)
-app.config['MAX_CONTENT_LENGTH']=200*1024*1024
+admin_bp=Blueprint('admin',__name__)
 
 def file_to_base(file):
     data=file.read()
     base64_data=base64.b64encode(data).decode('utf-8')
     return base64_data
 
-@app.errorhandler(413)
+@admin_bp.errorhandler(413)
 def file_too_large(error):
     return '文件过大啦！最大支持200MB的图片捏！',413
 
-@app.route('/graph',methods=['GET','POST'])
+@admin_bp.route('/graph',methods=['GET','POST'])
+@login_required
 def upload_graph():
     graph_file =request.files.get('graph')
     if not graph_file:
@@ -33,17 +36,42 @@ def upload_graph():
     ALLOW_SUFFIX={'.png','.jpeg','.gif','.jpg'}
     if graph_suffix_lower not in ALLOW_SUFFIX:
         return '文件类型错误，仅支持png、jpeg、gif、jpg文件'
+
+    permission=request.form.get('permission','private')
+    if permission not in ['public','private']:
+        return '权限只能是public或private'
+
     graph_filename=f'{graph_id}{graph_suffix}'
     graph_fullpath=graph_path.joinpath(graph_filename)
     graph_file.save(graph_fullpath)
+
+    new_graph=Graph(
+        graph_uuid=graph_id,
+        permission=permission,
+        user_id=current_user.id
+    )
+    db.session.add(new_graph)
+    db.session.commit()
+
     return f'图片上传成功，id：{graph_id}'
 
 
-@app.route('/graph/<string:graph_id>')
+@admin_bp.route('/graph/<string:graph_id>')
 def download_graph(graph_id):
     target_file=None
     graph_path = Profile.get_graph_path()
     up_folder=str(graph_path)
+
+    graph=Graph.query.filter_by(graph_uuid=graph_id).first()
+    if not graph:
+        return '未找到对应图片'
+
+    if graph.permission =='private':
+        if not current_user.is_authenticated:
+            return '请先登录',401
+        if graph.user_id!=current_user.id:
+            return '无权限访问私有图片'
+
     for filename in listdir(up_folder):
         if filename.startswith(f'{graph_id}.'):
             target_file=filename
@@ -72,9 +100,3 @@ def download_graph(graph_id):
             'file_format':Path(target_file).suffix[1:]
         }
     })
-
-
-
-if __name__ == '__main__':
-        app.run()
-
