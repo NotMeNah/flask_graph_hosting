@@ -3,7 +3,6 @@ from flask import Flask
 
 app =Flask(__name__)
 
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS']=False
 app.config['SECRET_KEY']='your_secret_key'
 app.config['SQLALCHEMY_ENGINE_OPTIONS'] = {"pool_pre_ping": True}
