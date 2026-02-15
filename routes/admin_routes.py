@@ -2,6 +2,7 @@ from os import listdir
 from uuid import uuid4
 from flask import Flask,request,send_from_directory,jsonify,Blueprint
 from flask_login import login_required,current_user
+from common.response import make_response
 
 from common.profile import Profile
 from pathlib import Path
@@ -19,14 +20,14 @@ def file_to_base(file):
 
 @admin_bp.errorhandler(413)
 def file_too_large(error):
-    return '文件过大啦！最大支持200MB的图片捏！',413
+    return make_response(413,"文件过大啦！最大支持200MB的图片捏！")
 
 @admin_bp.route('/graph',methods=['GET','POST'])
 @login_required
 def upload_graph():
     graph_file =request.files.get('graph')
     if not graph_file:
-        return '未上传有效图片'
+        return make_response(400,"未上传有效图片")
 
     graph_path=Profile.get_graph_path()
     graph_id=str(uuid4())
@@ -35,11 +36,11 @@ def upload_graph():
     graph_suffix_lower=graph_suffix.lower()
     ALLOW_SUFFIX={'.png','.jpeg','.gif','.jpg'}
     if graph_suffix_lower not in ALLOW_SUFFIX:
-        return '文件类型错误，仅支持png、jpeg、gif、jpg文件'
+        return make_response(400,"文件类型错误，仅支持png、jpeg、gif、jpg文件")
 
     permission=request.form.get('permission','private')
     if permission not in ['public','private']:
-        return '权限只能是public或private'
+        return make_response(400,"权限只能是public或private")
 
     graph_filename=f'{graph_id}{graph_suffix}'
     graph_fullpath=graph_path.joinpath(graph_filename)
@@ -53,7 +54,7 @@ def upload_graph():
     db.session.add(new_graph)
     db.session.commit()
 
-    return f'图片上传成功，id：{graph_id}'
+    return make_response(200,"图片上传成功，id：{graph_id}")
 
 
 @admin_bp.route('/graph/<string:graph_id>')
@@ -64,13 +65,13 @@ def download_graph(graph_id):
 
     graph=Graph.query.filter_by(graph_uuid=graph_id).first()
     if not graph:
-        return '未找到对应图片'
+        return make_response(404,"未找到对应图片")
 
     if graph.permission =='private':
         if not current_user.is_authenticated:
-            return '请先登录',401
+            return make_response(401,"请先登录")
         if graph.user_id!=current_user.id:
-            return '无权限访问私有图片'
+            return make_response(403,"无权限访问私有图片")
 
     for filename in listdir(up_folder):
         if filename.startswith(f'{graph_id}.'):
@@ -78,7 +79,7 @@ def download_graph(graph_id):
             break
 
     if  not target_file:
-        return '未找到对应图片'
+        return make_response(404,"未找到对应图片")
     return_format=request.args.get('format','stream').lower()
 
     if return_format!='base64':
@@ -89,9 +90,9 @@ def download_graph(graph_id):
         with open(file_full_path,'rb')as f:
             base64_str=file_to_base(f)
     except Exception as e:
-        return jsonify({'code': 500, 'msg': f'转换Base64失败：{str(e)}'}), 500
+        return make_response( 500,  f"转换Base64失败：{str(e)}")
 
-    return jsonify({
+    return make_response(200,"获取base64成功：{str(e)}",{
         'code':200,
         'msg':'获取base64成功',
         'data':{

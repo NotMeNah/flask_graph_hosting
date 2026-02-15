@@ -4,6 +4,7 @@ from Services.UserService import UserService
 from flask_login import login_required,current_user
 from models.graph import Graph
 from enter.extensions import db
+from common.response import make_response
 
 user_bp=Blueprint('user',__name__)
 
@@ -14,15 +15,15 @@ def login():
     password=data.get('password')
 
     if not username or not password:
-        return jsonify ({"code":400,"msg":"缺少用户名或密码"}),400
+        return make_response(400,"缺少用户名或密码")
 
     user,msg=UserService.login(username,password)
 
     if user:
         login_user(user)
-        return jsonify({"code":200,"msg":msg}),200
+        return make_response(200,"登录成功")
     else:
-        return jsonify({"code":400,"msg":msg}),400
+        return make_response(400,"登录失败")
 
 
 
@@ -33,12 +34,12 @@ def register():
     password=data.get('password')
 
     if not username or not password:
-        return jsonify({"code":400,"msg":"缺少用户名或密码"}),400
+        return make_response(400,"缺少用户名或密码")
 
     success,msg=UserService.register(username,password)
 
-    code=200 if success else 400
-    return jsonify({"code":code,"msg":msg}),code
+    code,msg=(200,"操作成功") if success else (400,"操作失败")
+    return make_response(code,msg)
 
 
 
@@ -47,16 +48,16 @@ def register():
 def update_graph_permission(graph_id):
     graph=Graph.query.filter_by(graph_uuid=graph_id).first()
     if not graph:
-        return jsonify({"code":404,"msg":"图片不存在"}),404
+        return make_response(404,"图片不存在")
 
     if graph.user_id!=current_user.id:
-        return jsonify({"code":403,"msg":"仅所有者可访问权限"}),403
+        return make_response(403,"仅所有者可访问权限")
 
     new_permission=request.json.get('permission')
     if new_permission not in['public','private']:
-        return jsonify({"code":400,"msg":"权限只能是public或private"}),400
+        return make_response(400,"权限只能是public或private")
 
     graph.permission=new_permission
     db.session.commit()
 
-    return jsonify({"code":200,"msg":"权限修改成功","data":new_permission}),200
+    return make_response(200,"权限修改成功",new_permission)

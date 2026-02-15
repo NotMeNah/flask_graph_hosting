@@ -1,0 +1,5 @@
+DB_USER="root"
+DB_PASS="buaascs"
+DB_HOST="43.138.28.230"
+DB_NAME="flask_app"
+SECRET_KEY= "8a9f7b6e5d4c3b2a1f9e8d7c6b5a4s3d2f1g9h8j7k6l5m4n3b2v1c9x8z7y6"
