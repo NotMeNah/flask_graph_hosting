@@ -10,3 +10,6 @@ class Graph(db.Model):
     permission=db.Column(db.String(10),default='private',nullable=False)
     create_time=db.Column(db.DateTime,default=datetime.now)
     user=db.relationship('User',backref='graphs')
+
+    file_identifier=db.Column(db.String(255),nullable=False)
+    storage_type=db.Column(db.String(20),nullable=False,default='local')

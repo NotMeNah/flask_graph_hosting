@@ -4,15 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ff306da-4a57-4b55-9c68-f8203fbc0305" name="更改" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pythonProject1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/profile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/routes/admin_routes.py" afterDir="false" />
+    <list default="true" id="4ff306da-4a57-4b55-9c68-f8203fbc0305" name="更改" comment="添加登录验证和公开、私密权限并提供修改功能（第二版）">
+      <change afterPath="$PROJECT_DIR$/storage/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/local.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/minio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin_routes.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,6 +29,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;NotMeNah&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/NotMeNah/flask_graph_hosting.git&quot;,
+    &quot;accountId&quot;: &quot;80f2cc00-7597-48d9-b349-17e41e101254&quot;
+  }
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
 }</component>
@@ -45,11 +56,19 @@
     &quot;Python.admin_routes.executor&quot;: &quot;Run&quot;,
     &quot;Python.helloworld.executor&quot;: &quot;Run&quot;,
     &quot;Python.post and get.executor&quot;: &quot;Run&quot;,
+    &quot;Python.run.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Pycharm/python_project/myflask/pythonProject1/data/graph&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
   }
 }</component>
-  <component name="RunManager" selected="Python.admin_routes">
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Pycharm\python_project\myflask\pythonProject1\data\graph" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Python.run">
     <configuration name="admin_routes" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="pythonProject1" />
       <option name="ENV_FILES" value="" />
@@ -116,8 +135,31 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="pythonProject1" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.run" />
         <item itemvalue="Python.admin_routes" />
         <item itemvalue="Python.post and get" />
         <item itemvalue="Python.helloworld" />
@@ -140,6 +182,31 @@
       <option name="presentableId" value="Default" />
       <updated>1769428624546</updated>
     </task>
+    <task id="LOCAL-00001" summary="添加登录验证和公开、私密权限并提供修改功能（第二版）">
+      <option name="closed" value="true" />
+      <created>1771149126569</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1771149126569</updated>
+    </task>
+    <task id="LOCAL-00002" summary="添加登录验证和公开、私密权限并提供修改功能（第二版）">
+      <option name="closed" value="true" />
+      <created>1771149199934</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1771149199934</updated>
+    </task>
+    <task id="LOCAL-00003" summary="添加登录验证和公开、私密权限并提供修改功能（第二版）">
+      <option name="closed" value="true" />
+      <created>1771149206253</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1771149206253</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -152,5 +219,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="添加登录验证和公开、私密权限并提供修改功能（第二版）" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加登录验证和公开、私密权限并提供修改功能（第二版）" />
   </component>
 </project>
