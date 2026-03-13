@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4ff306da-4a57-4b55-9c68-f8203fbc0305" name="更改" comment="minio" />
+    <list default="true" id="4ff306da-4a57-4b55-9c68-f8203fbc0305" name="更改" comment="添加登录验证和公开、私密权限并提供修改功能（第二版）">
+      <change afterPath="$PROJECT_DIR$/storage/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/base.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/local.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/storage/minio.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/models/graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/admin_routes.py" beforeDir="false" afterPath="$PROJECT_DIR$/routes/admin_routes.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -42,19 +50,19 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;Python.admin_routes.executor&quot;: &quot;Run&quot;,
-    &quot;Python.helloworld.executor&quot;: &quot;Run&quot;,
-    &quot;Python.post and get.executor&quot;: &quot;Run&quot;,
-    &quot;Python.run.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Pycharm/python_project/myflask/pythonProject1/data/graph&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "DefaultHtmlFileTemplate": "HTML File",
+    "Python.admin_routes.executor": "Run",
+    "Python.helloworld.executor": "Run",
+    "Python.post and get.executor": "Run",
+    "Python.run.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/Pycharm/python_project/myflask/pythonProject1/data/graph",
+    "settings.editor.selected.configurable": "preferences.general"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Pycharm\python_project\myflask\pythonProject1\data\graph" />
@@ -198,47 +206,7 @@
       <option name="project" value="LOCAL" />
       <updated>1771149206253</updated>
     </task>
-    <task id="LOCAL-00004" summary="添加登录验证和公开、私密权限并提供修改功能（第二版）">
-      <option name="closed" value="true" />
-      <created>1773368308821</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1773368308821</updated>
-    </task>
-    <task id="LOCAL-00005" summary="minio">
-      <option name="closed" value="true" />
-      <created>1773368333961</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1773368333961</updated>
-    </task>
-    <task id="LOCAL-00006" summary="minio">
-      <option name="closed" value="true" />
-      <created>1773368400870</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1773368400870</updated>
-    </task>
-    <task id="LOCAL-00007" summary="minio">
-      <option name="closed" value="true" />
-      <created>1773368580526</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1773368580526</updated>
-    </task>
-    <task id="LOCAL-00008" summary="minio">
-      <option name="closed" value="true" />
-      <created>1773368618227</created>
-      <option name="number" value="00008" />
-      <option name="presentableId" value="LOCAL-00008" />
-      <option name="project" value="LOCAL" />
-      <updated>1773368618227</updated>
-    </task>
-    <option name="localTasksCounter" value="9" />
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -254,7 +222,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="添加登录验证和公开、私密权限并提供修改功能（第二版）" />
-    <MESSAGE value="minio" />
-    <option name="LAST_COMMIT_MESSAGE" value="minio" />
+    <option name="LAST_COMMIT_MESSAGE" value="添加登录验证和公开、私密权限并提供修改功能（第二版）" />
   </component>
 </project>
